@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import Ajv from "ajv";
+import clsx from "clsx";
 import { Editor, Readme } from "components";
 import { getDependencies } from "helpers";
 import { useReadme } from "hooks";
@@ -72,7 +73,11 @@ export const DisplayDependencies = () => {
       </div>
       <div className="col-span-1">
         <p className="mb-4 text-2xl font-semibold">Package List</p>
-        <PackagesList setActivePackage={setActivePackage} list={packages} />
+        <PackagesList
+          activePackage={activePackage}
+          setActivePackage={setActivePackage}
+          list={packages}
+        />
       </div>
       <div className="col-span-3">
         <p className="mb-4 text-2xl font-semibold">
@@ -92,8 +97,9 @@ export const DisplayDependencies = () => {
 
 const PackagesList: React.FC<{
   list: Dependencies;
+  activePackage: string;
   setActivePackage: (p: string) => void;
-}> = ({ list, setActivePackage }) => {
+}> = ({ list, setActivePackage, activePackage }) => {
   const { dependencies, devDependencies } = list;
 
   return (
@@ -103,8 +109,17 @@ const PackagesList: React.FC<{
           <p className="mb-2 text-lg font-semibold">Dependencies</p>
           <ul className="flex list-none flex-col">
             {dependencies.map((i) => {
+              const isActive = i === activePackage;
               return (
-                <li role="button" key={i} onClick={() => setActivePackage(i)}>
+                <li
+                  className={clsx(
+                    isActive && "text-primary-500",
+                    "hover:text-primary-300",
+                  )}
+                  role="button"
+                  key={i}
+                  onClick={() => setActivePackage(i)}
+                >
                   {i}
                 </li>
               );
@@ -117,8 +132,17 @@ const PackagesList: React.FC<{
           <p className="mb-2 text-lg font-semibold">devDependencies</p>
           <ul className="flex list-none flex-col">
             {devDependencies.map((i) => {
+              const isActive = i === activePackage;
               return (
-                <li role="button" key={i} onClick={() => setActivePackage(i)}>
+                <li
+                  className={clsx(
+                    isActive && "text-primary-500",
+                    "hover:text-primary-300",
+                  )}
+                  role="button"
+                  key={i}
+                  onClick={() => setActivePackage(i)}
+                >
                   {i}
                 </li>
               );
