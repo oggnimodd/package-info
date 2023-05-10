@@ -56,6 +56,19 @@ const Readme: React.FC<ReadmeProps> = ({ children, className }) => {
             </li>
           );
         },
+        a({ node, className, children, ...props }) {
+          // Make the link always open in a new tab.
+          return (
+            <a
+              {...props}
+              className={className}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {children}
+            </a>
+          );
+        },
       }}
     >
       {children}
