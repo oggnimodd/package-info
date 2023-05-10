@@ -12,13 +12,15 @@ type Dependencies = {
   devDependencies: string[];
 };
 
+const initialPackages = {
+  dependencies: [],
+  devDependencies: [],
+};
+
 export const DisplayDependencies = () => {
   const [valid, setValid] = useState(false);
   const [doc, setDoc] = useState<string>(JSON.stringify({}, null, 2));
-  const [packages, setPackages] = useState<Dependencies>({
-    dependencies: [],
-    devDependencies: [],
-  });
+  const [packages, setPackages] = useState<Dependencies>(initialPackages);
 
   const handleChange = (doc: string) => {
     try {
@@ -27,6 +29,7 @@ export const DisplayDependencies = () => {
 
       if (!valid) {
         setValid(false);
+        setPackages(initialPackages);
       } else {
         setValid(true);
 
@@ -35,6 +38,7 @@ export const DisplayDependencies = () => {
       }
     } catch (e) {
       setValid(false);
+      setPackages(initialPackages);
     }
 
     setDoc(doc);
