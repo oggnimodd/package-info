@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import Ajv from "ajv";
 import { Editor } from "components";
+import { getDependencies } from "helpers";
 
 import { packageJsonSchema } from "../schema/package-json";
 
@@ -12,15 +13,15 @@ export const Default = () => {
 
   const handleChange = (doc: string) => {
     try {
-      console.log("Test");
-
-      const valid = ajv.validate(packageJsonSchema, JSON.parse(doc));
-      console.log(valid);
+      const packageJsonObject = JSON.parse(doc);
+      const valid = ajv.validate(packageJsonSchema, packageJsonObject);
 
       if (!valid) {
         setValid(false);
       } else {
         setValid(true);
+
+        console.log(getDependencies(packageJsonObject));
       }
     } catch (e) {
       setValid(false);
