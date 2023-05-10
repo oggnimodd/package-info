@@ -15,7 +15,11 @@
     "generate-pwa-asset": "node scripts/pwa-asset-generator.mjs",
     "vite:dev": "ladle serve",
     "vite:build": "ladle build",
-    "vite:preview": "ladle preview"
+    "vite:preview": "ladle preview",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "coverage": "vitest run --coverage",
+    "preview-coverage": "vite preview --outDir coverage"
   },
   "dependencies": {
     "@acme/tailwind-config": "*",
@@ -49,6 +53,7 @@
     "@types/node": "^18.0.0",
     "@types/react": "^18.0.25",
     "@types/react-dom": "^18.0.9",
+    "@vitest/ui": "^0.31.0",
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.2",
     "cypress": "^12.10.0",
@@ -61,6 +66,7 @@
     "react-router-dom": "^6.8.2",
     "tailwindcss": "^3.2.4",
     "typescript": "^4.9.4",
-    "vite": "^4.3.5"
+    "vite": "^4.3.5",
+    "vitest": "^0.31.0"
   }
 }

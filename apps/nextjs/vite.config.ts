@@ -1,3 +1,4 @@
+/// <reference types="vitest" />
 import path from "path";
 import queryString from "query-string";
 import { defineConfig, type ViteDevServer } from "vite";
@@ -37,5 +38,8 @@ export default defineConfig({
   server: {
     port: 61000,
     open: false,
+  },
+  test: {
+    globals: true,
   },
 });
