@@ -12,3 +12,7 @@
 body {
   position: relative;
 }
+
+div#ladle-root .dark {
+  @apply min-h-screen bg-background-500;
+}
