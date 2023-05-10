@@ -59,7 +59,7 @@ importers:
       '@vitest/ui': ^0.31.0
       ajv: ^8.12.0
       autoprefixer: ^10.4.13
-      axios: ^1.3.3
+      axios: ^1.3.4
       babel-loader: ^9.1.2
       clsx: ^1.2.1
       cypress: ^12.10.0

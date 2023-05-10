@@ -23,5 +23,6 @@
     "type-check": {
       "cache": false
     }
-  }
+  },
+  "globalEnv": ["NEXT_PUBLIC_GITHUB_ACCESS_TOKEN"]
 }

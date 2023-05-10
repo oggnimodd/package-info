@@ -1,3 +1,5 @@
+import { githubApi } from "config";
+
 interface Repository {
   url?: string;
   type?: string;
@@ -83,4 +85,21 @@ export const getRawReadmeUrl = async (url: string) => {
   }
 
   return rawReadmeUrl;
+};
+
+export const getReadmeUsingGithubApi = async (
+  url: string,
+): Promise<string | null> => {
+  try {
+    const [_, repoPath = ""] = url.split("github.com/");
+    const response = await githubApi.get(
+      `https://api.github.com/repos/${repoPath}/readme`,
+    );
+
+    const readmeContent = response.data.content;
+    const decodedContent = window.atob(readmeContent);
+    return decodedContent;
+  } catch (error) {
+    return null;
+  }
 };

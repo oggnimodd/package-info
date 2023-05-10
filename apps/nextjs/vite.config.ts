@@ -32,7 +32,7 @@ export default defineConfig({
   define: {
     "process.env": process.env,
   },
-  envPrefix: ["NEXT_", "VITE_"],
+  envPrefix: ["NEXT_PUBLIC_", "VITE_"],
   publicDir: "public",
   plugins: [mapNextJsAssets],
   server: {
