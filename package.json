@@ -1,5 +1,5 @@
 {
-  "name": "turbo-next-template",
+  "name": "package-info",
   "private": true,
   "packageManager": "pnpm@7.13.0",
   "scripts": {
