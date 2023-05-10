@@ -26,11 +26,12 @@ const Readme: React.FC<ReadmeProps> = ({ children, className }) => {
       components={{
         code({ node, inline, className, children, ...props }) {
           const match = /language-(\w+)/.exec(className || "");
-          return !inline && match ? (
+
+          return !inline ? (
             <SyntaxHighlighter
               {...props}
               style={oneDark}
-              language={match[1]}
+              language={match ? match[1] : "bash"}
               PreTag="div"
             >
               {String(children).replace(/\n$/, "")}
