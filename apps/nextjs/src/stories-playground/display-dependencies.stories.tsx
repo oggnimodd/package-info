@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Ajv from "ajv";
-import { Editor } from "components";
+import { Editor, Readme } from "components";
 import { getDependencies } from "helpers";
+import { useReadme } from "hooks";
+
+import { LoadingWithMessage } from "@acme/ui";
 
 import { packageJsonSchema } from "../schema/package-json";
 
@@ -21,6 +24,11 @@ export const DisplayDependencies = () => {
   const [valid, setValid] = useState(false);
   const [doc, setDoc] = useState<string>(JSON.stringify({}, null, 2));
   const [packages, setPackages] = useState<Dependencies>(initialPackages);
+  const [activePackage, setActivePackage] = useState("");
+
+  const { data, isLoading, isError } = useReadme({
+    packageName: activePackage,
+  });
 
   const handleChange = (doc: string) => {
     try {
@@ -30,15 +38,21 @@ export const DisplayDependencies = () => {
       if (!valid) {
         setValid(false);
         setPackages(initialPackages);
+        setActivePackage("");
       } else {
         setValid(true);
-
         const parsedPackages = getDependencies(packageJsonObject);
         setPackages(parsedPackages);
+        setActivePackage(
+          parsedPackages.dependencies[0] ||
+            parsedPackages.devDependencies[0] ||
+            "",
+        );
       }
     } catch (e) {
       setValid(false);
       setPackages(initialPackages);
+      setActivePackage("");
     }
 
     setDoc(doc);
@@ -58,7 +72,19 @@ export const DisplayDependencies = () => {
       </div>
       <div className="col-span-1">
         <p className="mb-4 text-2xl font-semibold">Package List</p>
-        <PackagesList list={packages} />
+        <PackagesList setActivePackage={setActivePackage} list={packages} />
+      </div>
+      <div className="col-span-3">
+        <p className="mb-4 text-2xl font-semibold">
+          Active Package : {activePackage || "None"}
+        </p>
+        {activePackage && isLoading && <LoadingWithMessage />}
+        {activePackage && isError && (
+          <div>
+            <p>Ooopps, something went wrong</p>
+          </div>
+        )}
+        {activePackage && data && <Readme>{data}</Readme>}
       </div>
     </div>
   );
@@ -66,18 +92,19 @@ export const DisplayDependencies = () => {
 
 const PackagesList: React.FC<{
   list: Dependencies;
-}> = ({ list }) => {
+  setActivePackage: (p: string) => void;
+}> = ({ list, setActivePackage }) => {
   const { dependencies, devDependencies } = list;
 
   return (
-    <div className="flex flex-col gap-y-20">
+    <div className="flex flex-col gap-y-8">
       {dependencies.length > 0 && (
         <div>
           <p className="mb-2 text-lg font-semibold">Dependencies</p>
-          <ul className="flex flex-col">
+          <ul className="flex list-none flex-col">
             {dependencies.map((i) => {
               return (
-                <li role="button" key={i}>
+                <li role="button" key={i} onClick={() => setActivePackage(i)}>
                   {i}
                 </li>
               );
@@ -88,10 +115,10 @@ const PackagesList: React.FC<{
       {devDependencies.length > 0 && (
         <div>
           <p className="mb-2 text-lg font-semibold">devDependencies</p>
-          <ul className="flex flex-col">
+          <ul className="flex list-none flex-col">
             {devDependencies.map((i) => {
               return (
-                <li role="button" key={i}>
+                <li role="button" key={i} onClick={() => setActivePackage(i)}>
                   {i}
                 </li>
               );
