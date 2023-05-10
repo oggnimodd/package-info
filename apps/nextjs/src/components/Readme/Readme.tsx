@@ -16,8 +16,6 @@ export interface ReadmeProps {
 }
 
 const Readme: React.FC<ReadmeProps> = ({ children, className }) => {
-  console.log(children);
-
   return (
     <ReactMarkdown
       className={clsx("", className)}

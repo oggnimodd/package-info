@@ -55,8 +55,32 @@ export const getPackageGithubUrl = async (packageName: string) => {
   return url;
 };
 
-export const getRawReadmeUrl = (url: string) => {
-  return (
-    url.replace("github.com", "raw.githubusercontent.com") + "/master/README.md"
-  );
+export const getRawReadmeUrl = async (url: string) => {
+  const pathToTry = [
+    "master/README.md",
+    "main/README.md",
+    "master/readme.md",
+    "main/readme.md",
+    "master/readme.markdown",
+    "main/readme.markdown",
+    "master/README.markdown",
+    "main/README.markdown",
+    "master/README",
+    "main/README",
+  ];
+  let rawReadmeUrl = null;
+
+  for (let i = 0; i < pathToTry.length; i++) {
+    const potentialUrl =
+      url.replace("github.com", "raw.githubusercontent.com") +
+      `/${pathToTry[i]}`;
+    const response = await fetch(potentialUrl);
+
+    if (response.ok) {
+      rawReadmeUrl = potentialUrl;
+      break;
+    }
+  }
+
+  return rawReadmeUrl;
 };

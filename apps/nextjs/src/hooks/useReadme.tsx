@@ -11,7 +11,11 @@ const useReadme = ({ packageName }: UseReadmeProps) => {
     ["readme", packageName],
     async () => {
       const packageGithubUrl = await getPackageGithubUrl(packageName);
-      const rawReadmeUrl = getRawReadmeUrl(packageGithubUrl || "");
+      const rawReadmeUrl = await getRawReadmeUrl(packageGithubUrl || "");
+
+      if (!rawReadmeUrl) {
+        throw new Error("Readme not found");
+      }
 
       // Fetch the url and transform it into txt file
       const response = await fetch(rawReadmeUrl);
@@ -20,6 +24,9 @@ const useReadme = ({ packageName }: UseReadmeProps) => {
     },
     {
       enabled: Boolean(packageName),
+      cacheTime: Infinity,
+      refetchOnWindowFocus: false,
+      retry: false,
     },
   );
 
