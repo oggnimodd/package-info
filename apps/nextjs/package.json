@@ -63,8 +63,6 @@
     "babel-loader": "^9.1.2",
     "cypress": "^12.10.0",
     "dotenv-cli": "^6.0.0",
-    "eslint": "^8.30.0",
-    "eslint-config-next": "^13.1.1",
     "postcss": "^8.4.19",
     "pwa-asset-generator": "^6.2.1",
     "query-string": "7.1.3",

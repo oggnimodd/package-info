@@ -111,11 +111,13 @@ const PackagesList: React.FC<{
             {dependencies.map((i) => {
               const isActive = i === activePackage;
               return (
+                // rome-ignore lint/a11y/useKeyWithClickEvents: <just a demo>
                 <li
                   className={clsx(
                     isActive && "text-primary-500",
                     "hover:text-primary-300",
                   )}
+                  // rome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: <just a demo>
                   role="button"
                   key={i}
                   onClick={() => setActivePackage(i)}
@@ -134,11 +136,13 @@ const PackagesList: React.FC<{
             {devDependencies.map((i) => {
               const isActive = i === activePackage;
               return (
+                // rome-ignore lint/a11y/useKeyWithClickEvents: <just a demo>
                 <li
                   className={clsx(
                     isActive && "text-primary-500",
                     "hover:text-primary-300",
                   )}
+                  // rome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: <just a demo>
                   role="button"
                   key={i}
                   onClick={() => setActivePackage(i)}

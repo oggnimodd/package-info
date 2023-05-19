@@ -73,9 +73,10 @@ export const getRawReadmeUrl = async (url: string) => {
   let rawReadmeUrl = null;
 
   for (let i = 0; i < pathToTry.length; i++) {
-    const potentialUrl =
-      url.replace("github.com", "raw.githubusercontent.com") +
-      `/${pathToTry[i]}`;
+    const potentialUrl = `${url.replace(
+      "github.com",
+      "raw.githubusercontent.com",
+    )}/${pathToTry[i]}`;
     const response = await fetch(potentialUrl);
 
     if (response.ok) {

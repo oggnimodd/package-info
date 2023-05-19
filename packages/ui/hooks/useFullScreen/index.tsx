@@ -1,8 +1,5 @@
 // Source : https://github.com/mantinedev/mantine/blob/master/src/mantine-hooks/src/use-fullscreen/use-fullscreen.ts
 
-/* eslint-disable @typescript-eslint/ban-ts-comment */
- 
-/* eslint-disable @typescript-eslint/no-unsafe-return */
 import { useCallback, useRef, useState, useEffect } from "react";
 
 function getFullscreenElement(): HTMLElement | null {

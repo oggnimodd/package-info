@@ -37,7 +37,7 @@ export const IconSize = () => {
           panelClassName="sm:ml-10 ml-4"
           header={<span>Small</span>}
         >
-          <p></p>
+          <p />
         </Collapsible>
         <Collapsible
           iconSize="md"
@@ -45,7 +45,7 @@ export const IconSize = () => {
           panelClassName="sm:ml-10 ml-4"
           header={<span>Medium</span>}
         >
-          <p></p>
+          <p />
         </Collapsible>
         <Collapsible
           iconSize="lg"
@@ -53,7 +53,7 @@ export const IconSize = () => {
           panelClassName="sm:ml-10 ml-4"
           header={<span>Large</span>}
         >
-          <p></p>
+          <p />
         </Collapsible>
         <Collapsible
           iconSize="xl"
@@ -61,7 +61,7 @@ export const IconSize = () => {
           panelClassName="sm:ml-10 ml-4"
           header={<span>Extra large</span>}
         >
-          <p></p>
+          <p />
         </Collapsible>
       </div>
     </Container>
