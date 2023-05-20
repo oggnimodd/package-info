@@ -20,6 +20,10 @@ const useReadme = ({ packageName }: UseReadmeProps) => {
       const readme = await getReadmeUsingGithubApi(packageGithubUrl || "");
       const defaultBranch = await getDefaultBranch(packageGithubUrl || "");
 
+      if (!readme) {
+        throw new Error("Readme not found");
+      }
+
       if (readme)
         return {
           readme,
