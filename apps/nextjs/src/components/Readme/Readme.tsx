@@ -8,8 +8,6 @@ import remarkGfm from "remark-gfm";
 
 import { Checkbox } from "@acme/ui";
 
-import "./Readme.css";
-
 export interface ReadmeProps {
   children: string;
   className?: string;
@@ -18,7 +16,7 @@ export interface ReadmeProps {
 const Readme: React.FC<ReadmeProps> = ({ children, className }) => {
   return (
     <ReactMarkdown
-      className={clsx("", className)}
+      className={clsx("readme", className)}
       remarkPlugins={[[remarkGfm]]}
       rehypePlugins={[rehypeRaw]}
       components={{

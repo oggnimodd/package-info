@@ -3,6 +3,7 @@ import type { GlobalProvider } from "@ladle/react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import "../src/styles/globals.css";
+import "../src/styles/readme.css";
 import "./style.css";
 
 const queryClient = new QueryClient({});

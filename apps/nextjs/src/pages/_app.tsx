@@ -1,5 +1,6 @@
 // src/pages/_app.tsx
 import "../styles/globals.css";
+import "../styles/readme.css";
 import type { AppType } from "next/app";
 import {
   Hydrate,
