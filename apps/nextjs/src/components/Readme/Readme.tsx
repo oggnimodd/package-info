@@ -57,7 +57,7 @@ const Readme: React.FC<ReadmeProps> = ({
 
   return (
     <ReactMarkdown
-      className={clsx("readme", className)}
+      className={clsx("readme pr-4", className)}
       remarkPlugins={[[remarkGfm]]}
       rehypePlugins={[rehypeRaw]}
       components={{
