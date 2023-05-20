@@ -7,5 +7,5 @@ html {
 }
 
 body {
-  @apply min-h-screen bg-white font-primary text-white dark:bg-background-500;
+  @apply min-h-screen bg-white font-primary dark:text-white dark:bg-background-500;
 }

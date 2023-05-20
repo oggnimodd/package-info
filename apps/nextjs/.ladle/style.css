@@ -14,5 +14,5 @@ body {
 }
 
 div#ladle-root .dark {
-  @apply min-h-screen bg-background-500;
+  @apply min-h-screen bg-background-500 text-white;
 }

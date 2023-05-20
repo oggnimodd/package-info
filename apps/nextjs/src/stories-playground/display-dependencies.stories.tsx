@@ -4,8 +4,8 @@ import clsx from "clsx";
 import { Editor, Readme } from "components";
 import { getDependencies } from "helpers";
 import { useReadme } from "hooks";
-
-import { LoadingWithMessage } from "@acme/ui";
+import { HeaderContainer, Brand, LoadingWithMessage, Button } from "@acme/ui";
+import { useLadleContext, ActionType, ThemeState } from "@ladle/react";
 
 import { packageJsonSchema } from "../schema/package-json";
 
@@ -26,6 +26,7 @@ export const DisplayDependencies = () => {
   const [doc, setDoc] = useState<string>(JSON.stringify({}, null, 2));
   const [packages, setPackages] = useState<Dependencies>(initialPackages);
   const [activePackage, setActivePackage] = useState("");
+  const { globalState, dispatch } = useLadleContext();
 
   const { data, isLoading, isError } = useReadme({
     packageName: activePackage,
@@ -60,45 +61,63 @@ export const DisplayDependencies = () => {
   };
 
   return (
-    <div className="grid grid-cols-6 gap-4">
-      <div className="col-span-2 flex w-full flex-col">
-        <p className="mb-4 text-2xl font-semibold">
-          Valid JSON: {String(valid)}
-        </p>
-        <Editor
-          className="max-w-full"
-          setEditorContent={handleChange}
-          initialContent={doc}
-        />
+    <>
+      <HeaderContainer>
+        <Brand />
+        <Button
+          onClick={() =>
+            dispatch({
+              type: ActionType.UpdateTheme,
+              value:
+                globalState.theme === ThemeState.Dark
+                  ? ThemeState.Light
+                  : ThemeState.Dark,
+            })
+          }
+        >
+          Test
+        </Button>
+      </HeaderContainer>
+      <div className="grid grid-cols-6 gap-4">
+        <div className="col-span-2 flex w-full flex-col">
+          <p className="mb-4 text-2xl font-semibold">
+            Valid JSON: {String(valid)}
+          </p>
+          <Editor
+            className="max-w-full"
+            setEditorContent={handleChange}
+            initialContent={doc}
+          />
+        </div>
+        <div className="col-span-1">
+          <p className="mb-4 text-2xl font-semibold">Package List</p>
+          <PackagesList
+            activePackage={activePackage}
+            setActivePackage={setActivePackage}
+            list={packages}
+          />
+        </div>
+        <div className="col-span-3">
+          <p className="mb-4 text-2xl font-semibold">
+            Active Package : {activePackage || "None"}
+          </p>
+          {activePackage && isLoading && <LoadingWithMessage />}
+          {activePackage && isError && (
+            <div>
+              <p>Ooopps, something went wrong</p>
+            </div>
+          )}
+          {!isLoading && !isError && activePackage && data && (
+            <Readme
+              repoUrl={data.repository || ""}
+              defaultBranch={data.defaultBranch}
+            >
+              {data.readme}
+            </Readme>
+          )}
+        </div>
       </div>
-      <div className="col-span-1">
-        <p className="mb-4 text-2xl font-semibold">Package List</p>
-        <PackagesList
-          activePackage={activePackage}
-          setActivePackage={setActivePackage}
-          list={packages}
-        />
-      </div>
-      <div className="col-span-3">
-        <p className="mb-4 text-2xl font-semibold">
-          Active Package : {activePackage || "None"}
-        </p>
-        {activePackage && isLoading && <LoadingWithMessage />}
-        {activePackage && isError && (
-          <div>
-            <p>Ooopps, something went wrong</p>
-          </div>
-        )}
-        {!isLoading && !isError && activePackage && data && (
-          <Readme
-            repoUrl={data.repository || ""}
-            defaultBranch={data.defaultBranch}
-          >
-            {data.readme}
-          </Readme>
-        )}
-      </div>
-    </div>
+    </>
   );
 };
 
