@@ -1,4 +1,4 @@
-import { HeaderContainer, Button, Brand } from "@acme/ui";
+import { HeaderContainer, Brand, HeaderIconButton } from "@acme/ui";
 import { useTheme } from "next-themes";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 
@@ -11,12 +11,9 @@ const Header = () => {
   return (
     <HeaderContainer>
       <Brand title="pkgjson" />
-      <Button
-        size="sm"
-        isAspectSquare
-        isRounded
+      <HeaderIconButton
         onClick={toggleTheme}
-        icon={theme === "light" ? MdDarkMode : MdLightMode}
+        icon={theme === "light" ? <MdLightMode /> : <MdDarkMode />}
       />
     </HeaderContainer>
   );
