@@ -88,6 +88,17 @@ export const getRawReadmeUrl = async (url: string) => {
   return rawReadmeUrl;
 };
 
+const decodeBase64 = (base64: string) => {
+  const text = window.atob(base64);
+  const length = text.length;
+  const bytes = new Uint8Array(length);
+  for (let i = 0; i < length; i++) {
+    bytes[i] = text.charCodeAt(i);
+  }
+  const decoder = new TextDecoder(); // default is utf-8
+  return decoder.decode(bytes);
+};
+
 export const getReadmeUsingGithubApi = async (
   url: string,
 ): Promise<string | null> => {
@@ -98,7 +109,7 @@ export const getReadmeUsingGithubApi = async (
     );
 
     const readmeContent = response.data.content;
-    const decodedContent = window.atob(readmeContent);
+    const decodedContent = decodeBase64(readmeContent);
     return decodedContent;
   } catch (error) {
     return null;
