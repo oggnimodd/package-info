@@ -1,6 +1,6 @@
 import { describe, expect, test } from "vitest";
 
-import { getPackageGithubUrl, getRawReadmeUrl } from "../readme";
+import { getPackageGithubUrl, getRawReadmeUrl } from "../repository";
 
 describe("getPackageGithubUrl", () => {
   test("should return the correct GitHub URL for a valid package", async () => {
