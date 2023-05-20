@@ -1,4 +1,4 @@
-import React, { memo } from "react";
+import React, { memo, useCallback } from "react";
 import clsx from "clsx";
 import ReactMarkdown from "react-markdown";
 import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
@@ -17,37 +17,9 @@ export interface ReadmeProps {
 }
 
 interface CreateGithubUrlProps {
-  repoUrl: string;
   type: "image" | "link";
-  branch: string;
   path?: string;
 }
-
-const createGithubUrl = ({
-  repoUrl,
-  type,
-  branch,
-  path = "",
-}: CreateGithubUrlProps) => {
-  const hasProtocol = path.startsWith("http://") || path.startsWith("https://");
-
-  if (hasProtocol) {
-    // URL already has a protocol, do nothing
-    return path;
-  } else {
-    let modifiedUrl;
-    if (type === "image") {
-      // Prepend the URL with the desired protocol and path
-      modifiedUrl = `https://raw.githubusercontent.com/${getRepoPath(
-        repoUrl,
-      )}/${branch}/${path.replace("./", "")}`;
-    } else if (type === "link") {
-      modifiedUrl = `${repoUrl}/blob/${branch}/${path.replace("./", "")}`;
-    }
-
-    return modifiedUrl;
-  }
-};
 
 const Readme: React.FC<ReadmeProps> = ({
   children,
@@ -55,6 +27,34 @@ const Readme: React.FC<ReadmeProps> = ({
   defaultBranch,
   repoUrl,
 }) => {
+  const createGithubUrl = useCallback(
+    ({ type, path = "" }: CreateGithubUrlProps) => {
+      const hasProtocol =
+        path.startsWith("http://") || path.startsWith("https://");
+
+      if (hasProtocol) {
+        // URL already has a protocol, do nothing
+        return path;
+      } else {
+        let modifiedUrl;
+        if (type === "image") {
+          // Prepend the URL with the desired protocol and path
+          modifiedUrl = `https://raw.githubusercontent.com/${getRepoPath(
+            repoUrl,
+          )}/${defaultBranch}/${path.replace("./", "")}`;
+        } else if (type === "link") {
+          modifiedUrl = `${repoUrl}/blob/${defaultBranch}/${path.replace(
+            "./",
+            "",
+          )}`;
+        }
+
+        return modifiedUrl;
+      }
+    },
+    [repoUrl, defaultBranch],
+  );
+
   return (
     <ReactMarkdown
       className={clsx("readme", className)}
@@ -96,10 +96,8 @@ const Readme: React.FC<ReadmeProps> = ({
         },
         a({ node, className, children, href, ...props }) {
           const formattedHref = createGithubUrl({
-            repoUrl,
             path: href,
             type: "link",
-            branch: defaultBranch,
           });
 
           // Make the link always open in a new tab.
@@ -117,20 +115,16 @@ const Readme: React.FC<ReadmeProps> = ({
         },
         img({ node, className, src, alt, ...props }) {
           const formattedSrc = createGithubUrl({
-            repoUrl,
             path: src,
             type: "image",
-            branch: defaultBranch,
           });
 
           return <img {...props} src={formattedSrc} alt={alt} />;
         },
         source({ node, className, srcSet, children, ...props }) {
           const formattedSrc = createGithubUrl({
-            repoUrl,
             path: srcSet,
             type: "image",
-            branch: defaultBranch,
           });
 
           return (
