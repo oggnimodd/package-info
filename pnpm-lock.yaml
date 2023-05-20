@@ -77,6 +77,9 @@ importers:
       clsx:
         specifier: ^1.2.1
         version: 1.2.1
+      jotai:
+        specifier: ^2.1.0
+        version: 2.1.0(react@18.2.0)
       kbar:
         specifier: 0.1.0-beta.40
         version: 0.1.0-beta.40(react-dom@18.2.0)(react@18.2.0)
@@ -116,9 +119,6 @@ importers:
       zod:
         specifier: ^3.21.4
         version: 3.21.4
-      zustand:
-        specifier: ^4.3.8
-        version: 4.3.8(react@18.2.0)
     devDependencies:
       '@types/node':
         specifier: ^18.16.13
@@ -7148,6 +7148,18 @@ packages:
     hasBin: true
     dev: true
 
+  /jotai@2.1.0(react@18.2.0):
+    resolution: {integrity: sha512-fR82PtHAmEQrc/daMEYGc4EteW96/b6wodtDSCzLvoJA/6y4YG70er4hh2f8CYwYjqwQ0eZUModGfG4DmwkTyQ==}
+    engines: {node: '>=12.20.0'}
+    peerDependencies:
+      react: '>=17.0.0'
+    peerDependenciesMeta:
+      react:
+        optional: true
+    dependencies:
+      react: 18.2.0
+    dev: false
+
   /js-beautify@1.14.7:
     resolution: {integrity: sha512-5SOX1KXPFKx+5f6ZrPsIPEY7NwKeQz47n3jm2i+XeHx9MoRsfQenlOP13FQhWvg8JRS0+XLO6XYUQ2GX+q+T9A==}
     engines: {node: '>=10'}
@@ -11160,22 +11172,6 @@ packages:
 
   /zod@3.21.4:
     resolution: {integrity: sha512-m46AKbrzKVzOzs/DZgVnG5H55N1sv1M8qZU3A8RIKbs3mrACDNeIOeilDymVb2HdmP8uwshOCF4uJ8uM9rCqJw==}
-
-  /zustand@4.3.8(react@18.2.0):
-    resolution: {integrity: sha512-4h28KCkHg5ii/wcFFJ5Fp+k1J3gJoasaIbppdgZFO4BPJnsNxL0mQXBSFgOgAdCdBj35aDTPvdAJReTMntFPGg==}
-    engines: {node: '>=12.7.0'}
-    peerDependencies:
-      immer: '>=9.0'
-      react: '>=16.8'
-    peerDependenciesMeta:
-      immer:
-        optional: true
-      react:
-        optional: true
-    dependencies:
-      react: 18.2.0
-      use-sync-external-store: 1.2.0(react@18.2.0)
-    dev: false
 
   /zwitch@2.0.4:
     resolution: {integrity: sha512-bXE4cR/kVZhKZX/RjPEflHaKVhUVl85noU3v6b8apfQEc1x4A+zBxjZ4lN8LqGd6WZ3dl98pY4o717VFmoPp+A==}

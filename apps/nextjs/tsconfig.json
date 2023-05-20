@@ -3,16 +3,32 @@
   "compilerOptions": {
     "baseUrl": "./src/",
     "paths": {
-      "components/*": ["./src/components/*"],
-      "utils/*": ["./src/utils/*"],
-      "layouts/*": ["./src/layouts/*"],
-      "stores/*": ["./src/stores/*"],
-      "types/*": ["types/*"],
-      "config/*": ["./src/config/*"],
-      "hooks/*": ["./src/hooks/*"]
+      "components/*": [
+        "./src/components/*"
+      ],
+      "utils/*": [
+        "./src/utils/*"
+      ],
+      "layouts/*": [
+        "./src/layouts/*"
+      ],
+      "atoms/*": [
+        "src/atoms/*"
+      ],
+      "types/*": [
+        "types/*"
+      ],
+      "config/*": [
+        "./src/config/*"
+      ],
+      "hooks/*": [
+        "./src/hooks/*"
+      ]
     }
   },
-  "exclude": ["cypress"],
+  "exclude": [
+    "cypress"
+  ],
   "include": [
     "next-env.d.ts",
     "../../packages/auth/next-auth.d.ts",
