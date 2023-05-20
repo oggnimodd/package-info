@@ -99,11 +99,17 @@ const decodeBase64 = (base64: string) => {
   return decoder.decode(bytes);
 };
 
+export const getRepoPath = (url: string) => {
+  const [_, repoPath = ""] = url.split("github.com/");
+
+  return repoPath;
+};
+
 export const getReadmeUsingGithubApi = async (
   url: string,
 ): Promise<string | null> => {
   try {
-    const [_, repoPath = ""] = url.split("github.com/");
+    const repoPath = getRepoPath(url);
     const response = await githubApi.get(
       `https://api.github.com/repos/${repoPath}/readme`,
     );
@@ -113,5 +119,19 @@ export const getReadmeUsingGithubApi = async (
     return decodedContent;
   } catch (error) {
     return null;
+  }
+};
+
+// Get the default branch of the repo using github api
+export const getDefaultBranch = async (url: string) => {
+  try {
+    const repoPath = getRepoPath(url);
+    const response = await githubApi.get(
+      `https://api.github.com/repos/${repoPath}`,
+    );
+
+    return response.data.default_branch;
+  } catch {
+    return "main";
   }
 };

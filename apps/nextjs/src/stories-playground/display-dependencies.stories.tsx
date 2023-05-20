@@ -89,7 +89,14 @@ export const DisplayDependencies = () => {
             <p>Ooopps, something went wrong</p>
           </div>
         )}
-        {activePackage && data && <Readme>{data}</Readme>}
+        {!isLoading && !isError && activePackage && data && (
+          <Readme
+            repoUrl={data.repository || ""}
+            defaultBranch={data.defaultBranch}
+          >
+            {data.readme}
+          </Readme>
+        )}
       </div>
     </div>
   );
