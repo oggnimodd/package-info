@@ -7,7 +7,7 @@ interface Repository {
 
 export const getPackageGithubUrl = async (packageName: string) => {
   const { repository }: { repository?: Repository } = await fetch(
-    `https://registry.npmjs.org/${packageName}`,
+    `https://registry.npmjs.org/${packageName}/latest`,
   ).then((res) => res.json());
 
   if (!repository || (repository.type && repository.type !== "git"))
