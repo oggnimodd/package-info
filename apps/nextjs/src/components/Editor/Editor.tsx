@@ -10,7 +10,7 @@ export interface EditorProps {
   setEditorContent: (doc: string) => void;
   initialContent: string;
   className?: string;
-  theme: string;
+  theme?: string;
 }
 
 const Editor: React.FC<EditorProps> = ({
