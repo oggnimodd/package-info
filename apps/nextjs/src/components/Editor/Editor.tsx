@@ -1,7 +1,6 @@
 import React, { memo, useCallback } from "react";
-import { json, jsonLanguage } from "@codemirror/lang-json";
+import { json } from "@codemirror/lang-json";
 import { bracketMatching } from "@codemirror/language";
-import { languages } from "@codemirror/language-data";
 import { EditorView } from "@codemirror/view";
 import { vscodeDark } from "@uiw/codemirror-theme-vscode";
 import CodeMirror from "@uiw/react-codemirror";
