@@ -84,6 +84,7 @@ export const DisplayDependencies = () => {
             Valid JSON: {String(valid)}
           </p>
           <Editor
+            theme={globalState.theme as string}
             className="max-w-full"
             setEditorContent={handleChange}
             initialContent={doc}
