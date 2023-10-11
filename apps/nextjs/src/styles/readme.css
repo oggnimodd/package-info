@@ -60,4 +60,8 @@
   a {
     @apply text-primary-500 underline;
   }
+
+  .task-list-item > label > input[type='checkbox'] {
+    @apply hidden;
+  }
 }
