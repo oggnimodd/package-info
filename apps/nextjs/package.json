@@ -28,7 +28,6 @@
     "@codemirror/view": "^6.21.3",
     "@headlessui/react": "^1.7.17",
     "@ladle/react": "^3.2.1",
-    "@react-aria/ssr": "^3.8.0",
     "@tanstack/react-query": "^4.36.1",
     "@uiw/codemirror-theme-tokyo-night": "^4.21.19",
     "@uiw/codemirror-theme-tokyo-night-day": "^4.21.19",

@@ -1,20 +1,22 @@
-import { HeaderContainer, Brand, HeaderIconButton } from "@acme/ui";
-import { useTheme } from "next-themes";
+import { HeaderContainer, Brand, HeaderIconButton, Container } from "@acme/ui";
+import { useTheme, useIsMounted } from "hooks";
 import { MdDarkMode, MdLightMode } from "react-icons/md";
 
 const Header = () => {
-  const { theme, setTheme } = useTheme();
-  const toggleTheme = () => {
-    setTheme(theme === "light" ? "dark" : "light");
-  };
+  const { isDark, toggleTheme } = useTheme();
+  const isMounted = useIsMounted();
 
   return (
     <HeaderContainer>
       <Brand title="pkgjson" />
-      <HeaderIconButton
-        onClick={toggleTheme}
-        icon={theme === "light" ? <MdLightMode /> : <MdDarkMode />}
-      />
+      <div className="ml-auto flex items-center gap-x-3">
+        {isMounted() && (
+          <HeaderIconButton
+            onClick={toggleTheme}
+            icon={isDark ? <MdDarkMode /> : <MdLightMode />}
+          />
+        )}
+      </div>
     </HeaderContainer>
   );
 };
